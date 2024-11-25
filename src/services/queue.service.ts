@@ -1,5 +1,5 @@
 import Queue from 'bull';
-import { Config } from '../config/database';
+import { Config } from '../models/config.model';
 import { User } from '../models/user.model';
 import axios from 'axios';
 import { IDBConfig } from '../types';
@@ -21,9 +21,11 @@ export class QueueService {
             },
             timestamp: pino.stdTimeFunctions.isoTime,
         });
+
         this.queue = new Queue('userFetcher', {
             redis: process.env.REDIS_URL
         });
+
         this.initializeQueue();
     }
 
@@ -41,6 +43,7 @@ export class QueueService {
 
 
     private async processBatch(batchNumber: number) {
+        this.logger.info(`Batch Number: ${batchNumber}`)
 
         const totalUsers = 5000;
         const usersPerRequest = 100;
@@ -96,7 +99,6 @@ export class QueueService {
     }
 
     public async scheduleUserFetch(totalUsers: number) {
-
         const batches = Math.ceil(totalUsers / this.config.requestsPerBatch);
         for (let i = 0; i < batches; i++) {
             await this.queue.add({ batch: i });

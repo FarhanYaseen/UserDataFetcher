@@ -34,8 +34,6 @@ export interface IDBConfig {
     apiParams: Record<string, any>;
 }
 
-
-
 export interface IAddress {
     city: string;
     state: string;
@@ -51,7 +49,6 @@ export interface IPagination {
     items: IItems[]; 
 
 }
-
 
 export interface IUserQueryParams {
     limit?: number;
