@@ -19,8 +19,8 @@ async function main() {
         apiParams: {}
     };
     // Initialize Queue Service
-    // const queueService = new QueueService(configInstance);
-    // await queueService.scheduleUserFetch(5000);
+    const queueService = new QueueService(configInstance);
+    await queueService.scheduleUserFetch(5000);
 
     const app = express();
     const userController = new UserController();
@@ -29,6 +29,9 @@ async function main() {
 
     app.listen(3000, () => {
         console.log('Server running on port 3000');
+    });
+    process.on('SIGTERM', async () => {
+        await queueService.cleanup();
     });
 }
 
