@@ -18,7 +18,6 @@ async function main() {
         apiUrl: 'https://randomuser.me/api',
         apiParams: {}
     };
-    // Initialize Queue Service
     const queueService = new QueueService(configInstance);
     await queueService.scheduleUserFetch(5000);
 
