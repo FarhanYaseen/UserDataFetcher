@@ -1,6 +1,16 @@
 ### Running the Node Project
 
+
+### Environment Setup
+
+Create a `.env` file with the following content:
+```
+MONGODB_URI=mongodb://localhost:27017/databaseName
+REDIS_URL=redis://localhost:6379
+```
+
 To run this Node.js project, follow these steps:
+
 
 1. **Clone the Repository**: Clone the repository to your local machine using Git.
    ```sh
@@ -12,26 +22,33 @@ To run this Node.js project, follow these steps:
    npm install
    ```
 
-3. **Start the Server**: Start the development server by running the following command:
+3. **Add Dependencies**: Make sure to install the following dependencies if not already installed.
+   ```sh
+   npm install typescript 
+   brew install mongodb redis
+   ```
+
+4. **Start the Server**: Start the development server by running the following command:
    ```sh
    npm run dev
    ```
 
-4. **Access the API**: Use a tool like Postman or cURL to send a GET request to the endpoint.
+5. **Access the API**: Use a tool like Postman or cURL to send a GET request to the endpoint.
    ```
    http://localhost:3000/users
    ```
 
-5. **Query Parameters**: Add query parameters to filter or sort the results. For example, to get the first page of users sorted by creation date:
+6. **Query Parameters**: Add query parameters to filter or sort the results. For example, to get the first page of users sorted by creation date:
    ```
    http://localhost:3000/users?limit=10&page=1&sortBy=createdAt
    ```
-6. **Run Test**: Run test by
-    ```
-    npm run test
-    ```
 
-6. **Receive the Response**: The server will return paginated user data in JSON format.
+7. **Run Tests**: Run tests by executing the following command:
+   ```
+   npm run test
+   ```
+
+8. **Receive the Response**: The server will return paginated user data in JSON format.
 
 ### API Documentation
 
@@ -74,4 +91,3 @@ GET http://localhost:3000/users?limit=10&page=1&sortBy=createdAt&search={"name":
     }
   ]
 }
-```
